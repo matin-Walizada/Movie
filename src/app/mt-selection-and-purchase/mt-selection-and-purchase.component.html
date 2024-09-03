@@ -1,0 +1,100 @@
+<form [formGroup]="movieSelectionForm" (ngSubmit)="onSubmit()">
+  <h2>Purchase Your Movie Ticket</h2>
+
+  <!-- Movie Selection -->
+  <div>
+    <label for="movieName">Select a Movie:</label>
+    <select id="movieName" formControlName="movieName" (change)="onChangeMovieName()">
+      <option *ngFor="let movie of movies" [value]="movie.movieID">{{ movie.name }}</option>
+    </select>
+    <div *ngIf="movieSelectionForm.get('movieName')?.invalid && movieSelectionForm.get('movieName')?.touched">
+      Movie name is required.
+    </div>
+  </div>
+
+  <!-- Movie Times -->
+  <div *ngIf="selectedMovie">
+    <label>Movie Times:</label>
+    <div *ngFor="let time of selectedMovie.times">
+      <input type="radio" [value]="time" formControlName="movieTime" (change)="onChangeMovieTime()"> {{ time }}
+    </div>
+    <div *ngIf="movieSelectionForm.get('movieTime')?.invalid && movieSelectionForm.get('movieTime')?.touched">
+      Movie time is required.
+    </div>
+  </div>
+
+  <!-- Number of Tickets -->
+  <div *ngIf="movieSelectionForm.get('movieTime')?.value">
+    <label for="numberOfTickets">Number of Tickets:</label>
+    <select id="numberOfTickets" formControlName="numberOfTickets">
+      <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]" [value]="i">{{ i }}</option>
+    </select>
+    <div *ngIf="movieSelectionForm.get('numberOfTickets')?.invalid && movieSelectionForm.get('numberOfTickets')?.touched">
+      Number of tickets is required.
+    </div>
+  </div>
+
+  <!-- Credit Card Information -->
+  <div *ngIf="movieSelectionForm.get('movieTime')?.value">
+    <h3>Credit Card Information</h3>
+    <label for="firstName">First Name:</label>
+    <input id="firstName" formControlName="firstName">
+    <div *ngIf="movieSelectionForm.get('firstName')?.invalid && movieSelectionForm.get('firstName')?.touched">
+      First name is required and must contain letters only.
+    </div>
+
+    <label for="lastName">Last Name:</label>
+    <input id="lastName" formControlName="lastName">
+    <div *ngIf="movieSelectionForm.get('lastName')?.invalid && movieSelectionForm.get('lastName')?.touched">
+      Last name is required and must contain letters only.
+    </div>
+
+    <label for="address1">Address Line 1:</label>
+    <input id="address1" formControlName="address1">
+    <div *ngIf="movieSelectionForm.get('address1')?.invalid && movieSelectionForm.get('address1')?.touched">
+      Address Line 1 is required.
+    </div>
+
+    <label for="address2">Address Line 2:</label>
+    <input id="address2" formControlName="address2">
+
+    <label for="city">City:</label>
+    <input id="city" formControlName="city">
+    <div *ngIf="movieSelectionForm.get('city')?.invalid && movieSelectionForm.get('city')?.touched">
+      City is required and must contain letters only.
+    </div>
+
+    <label for="state">State:</label>
+    <input id="state" formControlName="state">
+    <div *ngIf="movieSelectionForm.get('state')?.invalid && movieSelectionForm.get('state')?.touched">
+      State is required and must contain letters only.
+    </div>
+
+    <label for="zip">Zip Code:</label>
+    <input id="zip" formControlName="zip">
+    <div *ngIf="movieSelectionForm.get('zip')?.invalid && movieSelectionForm.get('zip')?.touched">
+      Zip code is required and must match the format (12345, 12345-1234, or 12345 1234).
+    </div>
+
+    <label for="ccNumber">Credit Card Number:</label>
+    <input id="ccNumber" formControlName="ccNumber" type="password">
+    <div *ngIf="movieSelectionForm.get('ccNumber')?.invalid && movieSelectionForm.get('ccNumber')?.touched">
+      Credit card number is required and must be 16 digits long.
+    </div>
+
+    <label for="cExpiration">Credit Card Expiration:</label>
+    <input id="cExpiration" formControlName="cExpiration" placeholder="MM/YY">
+    <div *ngIf="movieSelectionForm.get('cExpiration')?.invalid && movieSelectionForm.get('cExpiration')?.touched">
+      Credit card expiration date is required and must be in MM/YY format.
+    </div>
+
+    <label for="ccCvv">Credit Card CVV:</label>
+    <input id="ccCvv" formControlName="ccCvv" type="password">
+    <div *ngIf="movieSelectionForm.get('ccCvv')?.invalid && movieSelectionForm.get('ccCvv')?.touched">
+      Credit card CVV is required and must be 3 digits long.
+    </div>
+
+    <button  type="submit" [disabled]="!movieSelectionForm.valid">Submit</button>
+    <button type="button" (click)="onReset()">Reset</button>
+  </div>
+</form>

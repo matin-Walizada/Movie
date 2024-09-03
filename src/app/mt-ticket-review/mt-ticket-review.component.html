@@ -1,0 +1,28 @@
+<h2>Review your purchase:</h2>
+
+<div>
+  <h3>Movie Details</h3>
+  <p>Selected Movie: {{ selectedMovie?.name ?? 'Not selected' }}</p>
+  <p>Selected Movie Time: {{ selectedMovieTime ?? 'Not available' }}</p>
+   <!-- <p>Number of Tickets: {{numberOfTickets ?? 'Not specified'}}</p> -->
+</div>
+
+<div>
+  <h3>Credit Card Information</h3>
+  <p>First Name: {{ purchaseInfo?.firstName ?? 'N/A' }}</p>
+  <p>Last Name: {{ purchaseInfo?.lastName ?? 'N/A' }}</p>
+  <p>Address Line 1: {{ purchaseInfo?.address1 ?? 'N/A' }}</p>
+  <p>City: {{ purchaseInfo?.city ?? 'N/A' }}</p>
+  <p>State: {{ purchaseInfo?.state ?? 'N/A' }}</p>
+  <p>Zip: {{ purchaseInfo?.zip ?? 'N/A' }}</p>
+  <p>Credit Card Number: {{ (purchaseInfo?.ccNumber ?? 'N/A') | redaction }}</p>
+  <p>Credit Card Expiration: {{ purchaseInfo?.cExpiration ?? 'N/A' }}</p>
+  <p>Credit Card CVV: {{ (purchaseInfo?.ccCvv ?? 'N/A') | redaction: 3 }}</p>
+</div>
+ 
+ 
+ 
+
+
+<button (click)="confirmPurchase()">Confirm Purchase</button>
+<button (click)="chooseDifferentMovie()">Choose a Different Movie</button>

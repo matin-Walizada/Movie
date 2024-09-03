@@ -1,0 +1,11 @@
+<h2>Your movie purchase is confirmed!</h2>
+
+<div>
+  <h3>Movie Details</h3>
+  <p>Selected Movie: {{ movieName }}</p>
+  <p>Number of Tickets: {{ numberOfTickets }}</p>
+  <p>Confirmation Number: {{ confirmationNumber }}</p>
+  <img [src]="movieImage" alt="Movie Image">
+</div>
+
+<button (click)="navigateToLanding()">Home</button>
